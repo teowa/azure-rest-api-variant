@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/go-git/go-git/v5 v5.8.0
+	github.com/go-openapi/jsonreference v0.20.2
 	github.com/go-openapi/loads v0.21.2
 	github.com/go-openapi/spec v0.20.9
 	github.com/hashicorp/golang-lru/v2 v2.0.4
@@ -24,7 +25,6 @@ require (
 	github.com/go-openapi/analysis v0.21.4 // indirect
 	github.com/go-openapi/errors v0.20.2 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
-	github.com/go-openapi/jsonreference v0.20.2 // indirect
 	github.com/go-openapi/strfmt v0.21.3 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect

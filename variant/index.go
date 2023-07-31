@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/go-git/go-git/v5"
+	"github.com/go-openapi/jsonreference"
 	openapiSpec "github.com/go-openapi/spec"
 )
 
@@ -65,7 +66,7 @@ func Build(specDir string) (*Index, error) {
 		go func(i int) {
 			defer waitGroup.Done()
 			for specPath := range specChan {
-				log.Printf("%d [INFO] scanning spec file: %s", i, specPath)
+				//log.Printf("%d [INFO] scanning spec file: %s", i, specPath)
 				doc, err := loadSwagger(specPath)
 				if err != nil {
 					log.Fatal(err)
@@ -174,7 +175,9 @@ func makeKey(specPath, schemaName string) string {
 		log.Fatal(err)
 	}
 
-	return fmt.Sprintf("%s#%s", relPath, schemaName)
+	ref := jsonreference.MustCreateRef(relPath + "#/definitions/" + schemaName)
+
+	return ref.String()
 }
 
 func SchemaNamePathFromRef(swaggerPath string, ref openapiSpec.Ref) (name string, path string) {

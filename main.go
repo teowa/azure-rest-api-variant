@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/teowa/azure-rest-api-variants/variant"
 	"github.com/urfave/cli/v2"
@@ -43,7 +44,14 @@ func main() {
 					if c.NArg() > 1 {
 						return fmt.Errorf("more than one arguments specified")
 					}
+
 					specDir := c.Args().First()
+					if strings.HasSuffix(specDir, "specification/") {
+						specDir = strings.TrimSuffix(specDir, "/")
+					}
+					if !strings.HasSuffix(specDir, "specification") {
+						return fmt.Errorf("the swagger spec dir must be the specification folder, e.g., /home/test/go/src/github.com/azure/azure-rest-api-specs/specification")
+					}
 					index, err := variant.Build(specDir)
 					if err != nil {
 						return err
